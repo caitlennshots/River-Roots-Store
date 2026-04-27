@@ -1,6 +1,8 @@
 function App() {
   const [cart, setCart] = React.useState([]);
   const [selectedCategory, setSelectedCategory] = React.useState("All");
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  const [currentPage, setCurrentPage] = React.useState("home");
 
   function handleAddToCart(product) {
     setCart([...cart, product]);
@@ -8,6 +10,11 @@ function App() {
 
   function handleRemoveFromCart(indexToRemove) {
     setCart(cart.filter((item, index) => index !== indexToRemove));
+  }
+
+  function goToCategory(category) {
+    setSelectedCategory(category);
+    setCurrentPage("home");
   }
 
   const filteredProducts =
@@ -21,47 +28,158 @@ function App() {
         cartCount={cart.length}
         cartItems={cart}
         onRemoveFromCart={handleRemoveFromCart}
+        onHomeClick={() => setCurrentPage("home")}
+        onShopClick={() => setCurrentPage("shop")}
+        onAboutClick={() => setCurrentPage("about")}
+        onBlogClick={() => setCurrentPage("blog")}
       />
+{/* home page */}
+      {currentPage === "home" && (
+        <div>
+          <div className="category-filters">
+            <button
+              className={selectedCategory === "All" ? "active" : ""}
+              onClick={() => setSelectedCategory("All")}
+            >
+              All
+            </button>
 
-   <div className="category-filters">
-  <button
-    className={selectedCategory === "All" ? "active" : ""}
-    onClick={() => setSelectedCategory("All")}
-  >
-    All
-  </button>
+            <button
+              className={selectedCategory === "Apparel" ? "active" : ""}
+              onClick={() => setSelectedCategory("Apparel")}
+            >
+              Apparel
+            </button>
 
-  <button
-    className={selectedCategory === "Apparel" ? "active" : ""}
-    onClick={() => setSelectedCategory("Apparel")}
-  >
-    Apparel
-  </button>
+            <button
+              className={selectedCategory === "Accessories" ? "active" : ""}
+              onClick={() => setSelectedCategory("Accessories")}
+            >
+              Accessories
+            </button>
 
-  <button
-    className={selectedCategory === "Accessories" ? "active" : ""}
-    onClick={() => setSelectedCategory("Accessories")}
-  >
-    Accessories
-  </button>
+            <button
+              className={selectedCategory === "Home" ? "active" : ""}
+              onClick={() => setSelectedCategory("Home")}
+            >
+              Home
+            </button>
+          </div>
 
-  <button
-    className={selectedCategory === "Home" ? "active" : ""}
-    onClick={() => setSelectedCategory("Home")}
-  >
-    Home
-  </button>
-</div>
+          <div id="shop" className="product-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={handleAddToCart}
+                onProductClick={setSelectedProduct}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+        {/* shop page */}
+      {currentPage === "shop" && (
+        <div className="category-grid">
+          <div className="category-card" onClick={() => goToCategory("Apparel")}>
+            <img src="RiverRoots Sweater.JPEG" alt="Apparel" />
+            <h3>Apparel</h3>
+            <p>Shop sweatshirts, tees, and cozy River Roots apparel.</p>
+          </div>
 
-      <div className="product-grid">
-        {filteredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={handleAddToCart}
-          />
-        ))}
-      </div>
+          <div className="category-card" onClick={() => goToCategory("Accessories")}>
+            <img src="RRHat.jpg" alt="Accessories" />
+            <h3>Accessories</h3>
+            <p>Shop caps, totes, stickers, and everyday extras.</p>
+          </div>
+
+          <div className="category-card" onClick={() => goToCategory("Home")}>
+            <img src="RiverRootsMug.JPEG" alt="Home" />
+            <h3>Home</h3>
+            <p>Shop mugs and home goods inspired by Tennessee roots.</p>
+          </div>
+        </div>
+      )}
+        {/* about page */}
+      {currentPage === "about" && (
+  <div className="about-section">
+    <h2>About River Roots 🌿</h2>
+
+    <p className="about-tagline">
+      Rooted in nature. Inspired by Tennessee. Made for comfort.
+    </p>
+
+    <p>
+      River Roots is a small lifestyle brand inspired by winding rivers,
+      quiet forests, and the feeling of being at home wherever you are.
+    </p>
+
+    <p>
+      Each piece is designed to bring a little bit of that calm, cozy,
+      outdoorsy energy into your everyday life.
+    </p>
+
+    <p className="about-highlight">
+      🌲 Slow down. Breathe in. Stay rooted.
+    </p>
+  </div>
+)}
+        {/* add blog page */}
+        {currentPage === "blog" && (
+  <div className="blog-bridge">
+    <h2>Nature’s Lens 📷</h2>
+
+    <p className="blog-tagline">
+      A visual journal of nature, light, and quiet moments.
+    </p>
+
+    <p>
+      Explore photography inspired by Tennessee landscapes,
+      peaceful trails, and everyday beauty through the lens.
+    </p>
+
+    <button
+      className="blog-button"
+      onClick={() =>
+        window.open("https://caitlennshots.github.io/NaturesLensBlog/", "_blank")
+      }
+    >
+      Visit the Blog →
+    </button>
+  </div>
+)}
+
+
+
+      {selectedProduct && (
+        <div className="modal-overlay" onClick={() => setSelectedProduct(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="close-button"
+              onClick={() => setSelectedProduct(null)}
+            >
+              ×
+            </button>
+
+            <h2>{selectedProduct.name}</h2>
+
+            <img
+              src={
+                selectedProduct.image ||
+                (selectedProduct.images && selectedProduct.images[0])
+              }
+              alt={selectedProduct.name}
+            />
+
+            <p>${selectedProduct.price.toFixed(2)}</p>
+            <p>{selectedProduct.description}</p>
+
+            <button onClick={() => handleAddToCart(selectedProduct)}>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

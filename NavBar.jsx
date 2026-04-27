@@ -1,4 +1,4 @@
-function NavBar({ cartCount, cartItems, onRemoveFromCart }) {
+function NavBar({ cartCount, cartItems, onRemoveFromCart, onHomeClick, onShopClick, onAboutClick, onBlogClick }) {
   const [cartOpen, setCartOpen] = React.useState(false);
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
 
@@ -7,10 +7,12 @@ function NavBar({ cartCount, cartItems, onRemoveFromCart }) {
       <h1>River Roots 🌿</h1>
 
       <div className="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Shop</a>
-        <a href="#">About</a>
-
+        <button className="nav-button" onClick={onHomeClick}>Home</button>
+        <button className="nav-button" onClick={onShopClick}>Shop</button>
+        <button className="nav-button" onClick={onAboutClick}>About</button>
+        <button className="nav-button" onClick={onBlogClick}>Blog</button>
+      </div>
+    
         <button
           type="button"
           className="cart-button"
@@ -42,7 +44,6 @@ function NavBar({ cartCount, cartItems, onRemoveFromCart }) {
             )}
           </div>
         )}
-      </div>
     </nav>
   );
 }
