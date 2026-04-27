@@ -376,3 +376,70 @@ body {
   background-color: #254a40;
   transform: scale(1.05);
 }
+/* blog style */
+/* 🌿 BLOG LAYOUT FIX */
+.blog-landing {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 24px;
+}
+
+/* 🌿 HERO CENTERING */
+.blog-hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* 🌿 GRID */
+.blog-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* 🌿 CARDS */
+.blog-preview-card {
+  background: #f8faf8;
+  border: 1px solid #e2e8e2;
+  border-radius: 16px;
+  padding: 24px;
+
+  text-align: center;
+  color: #2f5d50;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: 0.25s ease;
+}
+
+/* ✨ hover effect */
+.blog-preview-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}
+
+/* spacing fix */
+.blog-preview-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.blog-preview-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+/* make the journal prettier */
+.blog-kicker {
+  display: inline-block;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+
+  color: #2f5d50;
+  background: rgba(47, 93, 80, 0.08);
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  margin-bottom: 12px;
+}

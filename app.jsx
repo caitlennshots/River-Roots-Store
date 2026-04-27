@@ -126,29 +126,43 @@ function App() {
 )}
         {/* add blog page */}
         {currentPage === "blog" && (
-  <div className="blog-bridge">
-    <h2>Nature’s Lens 📷</h2>
+  <div className="blog-landing">
+    <div className="blog-hero">
+      <p className="blog-kicker">River Roots Journal</p>
+      <h2>Nature’s Lens 📷</h2>
 
-    <p className="blog-tagline">
-      A visual journal of nature, light, and quiet moments.
-    </p>
+      <p className="blog-tagline">
+        A peaceful photography journal inspired by trails, rivers, cabins, and quiet outdoor moments.
+      </p>
 
-    <p>
-      Explore photography inspired by Tennessee landscapes,
-      peaceful trails, and everyday beauty through the lens.
-    </p>
+      <button
+        className="blog-button"
+        onClick={() =>
+          window.open("https://caitlennshots.github.io/NaturesLensBlog/", "_blank")
+        }
+      >
+        Visit Nature’s Lens →
+      </button>
+    </div>
 
-    <button
-      className="blog-button"
-      onClick={() =>
-        window.open("https://caitlennshots.github.io/NaturesLensBlog/", "_blank")
-      }
-    >
-      Visit the Blog →
-    </button>
+    <div className="blog-preview-grid">
+      <div className="blog-preview-card">
+        <h3>🌲 Trail Stories</h3>
+        <p>Explore nature walks, scenic views, and peaceful outdoor escapes.</p>
+      </div>
+
+      <div className="blog-preview-card">
+        <h3>🏕️ Cabin Vibes</h3>
+        <p>Cozy inspiration for slow weekends, mountain stays, and quiet mornings.</p>
+      </div>
+
+      <div className="blog-preview-card">
+        <h3>📸 Photography</h3>
+        <p>A creative look at landscapes, light, textures, and natural beauty.</p>
+      </div>
+    </div>
   </div>
 )}
-
 
 
       {selectedProduct && (
